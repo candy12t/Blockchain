@@ -23,3 +23,20 @@ class BlockChain(object):
 		self.chain.append(block)
 		self.transaction_pool = []
 		return block
+
+
+def pprint(chains):
+	for i, chain in enumerate(chains):
+		print(f'{"="*25} Chain {i} {"="*25}')
+		for k, v in chain.items():
+			print(f'{k:15}{v}')
+	print('\n')
+
+
+if __name__ == '__main__':
+	block_chain = BlockChain()
+	pprint(block_chain.chain)
+	block_chain.create_block(5, 'hash 1')
+	pprint(block_chain.chain)
+	block_chain.create_block(2, 'hash 2')
+	pprint(block_chain.chain)
