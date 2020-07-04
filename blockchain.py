@@ -42,32 +42,18 @@ class BlockChain(object):
 		return True
 
 
-def pprint(chains):
-	for i, chain in enumerate(chains):
-		print(f'{"="*25} Chain {i} {"="*25}')
-		for k, v in chain.items():
-			if k == 'transactions':
-				print(k)
-				for d in v:
-					print(f'{"-"*40}')
-					for kk, vv in d.items():
-						print(f' {kk:30}{vv}')
-			else:
-				print(f'{k:15}{v}')
-	print('\n')
-
 
 if __name__ == '__main__':
 	block_chain = BlockChain()
-	pprint(block_chain.chain)
+	utils.pprint(block_chain.chain)
 
 	block_chain.add_transaction('A', 'B', 1.0)
 	previous_hash = block_chain.hash(block_chain.chain[-1])
 	block_chain.create_block(5, previous_hash)
-	pprint(block_chain.chain)
+	utils.pprint(block_chain.chain)
 
 	block_chain.add_transaction('C', 'D', 2.0)
 	block_chain.add_transaction('X', 'Y', 3.0)
 	previous_hash = block_chain.hash(block_chain.chain[-1])
 	block_chain.create_block(2, previous_hash)
-	pprint(block_chain.chain)
+	utils.pprint(block_chain.chain)
