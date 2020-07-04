@@ -15,7 +15,7 @@ def pprint(chains):
 				for d in v:
 					print(f'{"-"*40}')
 					for kk, vv in d.items():
-						print(f' {kk:30}{vv}')
+						print(f'{kk:30}{vv}')
 			else:
 				print(f'{k:15}{v}')
 	print('\n')

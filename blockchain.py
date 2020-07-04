@@ -25,7 +25,7 @@ class BlockChain(object):
 
 	def create_block(self, nonce, previous_hash):
 		block = utils.sorted_dict_by_key({
-			'timestamp' : time.time(),
+			'timestamp': time.time(),
 			'transactions': self.transaction_pool,
 			'nonce': nonce,
 			'previous_hash': previous_hash
