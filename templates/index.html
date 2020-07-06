@@ -5,6 +5,23 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Wallet</title>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script>
+		$(function () {
+			$.ajax({
+				url: '/wallet',
+				type: 'POST',
+				success: function (response) {
+					$('#public_key').val(response['public_key']);
+					$('#private_key').val(response['private_key']);
+					$('#blockchain_address').val(response['blockchain_address']);
+					console.info(response);
+				},
+				error: function (error) {
+					console.error(error);
+				}
+			})
+		})
+	</script>
 </head>
 <body>
 	<div>
@@ -13,8 +30,8 @@
 		<button id="reload_wallet">Reload Wallet</button>
 		<p>Public Key</p>
 		<textarea name="" id="public_key" cols="100" rows="2"></textarea>
-		<p>Pravate Key</p>
-		<textarea name="" id="pravate_key" cols="100" rows="2"></textarea>
+		<p>Private Key</p>
+		<textarea name="" id="private_key" cols="100" rows="2"></textarea>
 		<p>Blockchian Address</p>
 		<textarea name="" id="blockchain_address" cols="100" rows="2"></textarea>
 	</div>
