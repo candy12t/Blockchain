@@ -42,12 +42,19 @@ class BlockChain(object):
 		return hashlib.sha256(sorted_block.encode()).hexdigest()
 
 	def add_transaction(self, sender_blockchain_address,
-						recipient_blockchain_address, value):
+						recipient_blockchain_address, value,
+						sender_public_key=None, signature=None):
 		transaction = utils.sorted_dict_by_key({
 			'sender_blockchain_address': sender_blockchain_address,
 			'recipient_blockchain_address': recipient_blockchain_address,
 			'value': float(value)
 		})
+
+		if self.verify_transaction_signature(
+				sender_public_key, signature, transaction):
+			self.transaction_pool.append(transaction)
+			return True
+		return False
 
 	def verify_transaction_signature(
 			self, sender_public_key, signature, transaction):
