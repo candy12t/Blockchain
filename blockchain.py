@@ -50,6 +50,10 @@ class BlockChain(object):
 			'value': float(value)
 		})
 
+		if sender_blockchain_address == MINING_SENDER:
+			self.transaction_pool.append(transaction)
+			return True
+
 		if self.verify_transaction_signature(
 				sender_public_key, signature, transaction):
 			self.transaction_pool.append(transaction)
