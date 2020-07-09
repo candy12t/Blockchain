@@ -1,5 +1,10 @@
 import collections
+import logging
+import re
+import socket
 
+
+logger = logging.getLogger(__name__)
 
 def sorted_dict_by_key(unsorted_dict):
 	return collections.OrderedDict(
@@ -19,3 +24,23 @@ def pprint(chains):
 			else:
 				print(f'{k:15}{v}')
 	print('\n')
+
+
+def is_found_host(target, port):
+	with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
+		sock.settimeout(1)
+		try:
+			sock.connect((target, port))
+			return True
+		except Exception as ex:
+			logger.error({
+				'action': 'is_found_host',
+				'target': target,
+				'port': port,
+				'ex': ex
+			})
+			return False
+
+
+if __name__ == '__main__':
+	print(is_found_host('127.0.0.1', 5000))
