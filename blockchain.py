@@ -41,7 +41,7 @@ class BlockChain(object):
 	def run(self):
 		self.sync_neighbours()
 		self.resolve_conflicts()
-		# self.mining()
+		self.start_mining()
 
 	def set_neighbours(self):
 		self.neighbours = utils.find_neighbours(
@@ -95,9 +95,9 @@ class BlockChain(object):
 		if self.verify_transaction_signature(
 				sender_public_key, signature, transaction):
 
-			# if self.calculate_total_amount(sender_blockchain_address) < float(value):
-			# 	logger.error({'action': 'add_transaction', 'error': 'no_value'})
-			# 	return False
+			if self.calculate_total_amount(sender_blockchain_address) < float(value):
+				logger.error({'action': 'add_transaction', 'error': 'no_value'})
+				return False
 
 			self.transaction_pool.append(transaction)
 			return True
@@ -155,8 +155,8 @@ class BlockChain(object):
 		return nonce
 
 	def mining(self):
-		if not self.transaction_pool:
-			return False
+		# if not self.transaction_pool:
+		# 	return False
 
 		self.add_transaction(
 			sender_blockchain_address=MINING_SENDER,
