@@ -102,7 +102,7 @@ def mine():
 
 @app.route('/mine/start', methods=['GET'])
 def start_mine():
-	get_blockchain().start_minig()
+	get_blockchain().start_mining()
 	return jsonify({'message': 'success'}), 200
 
 @app.route('/consensus', methods=['PUT'])

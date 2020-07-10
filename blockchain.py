@@ -172,13 +172,13 @@ class BlockChain(object):
 
 		return True
 
-	def start_minig(self):
+	def start_mining(self):
 		is_acquire = self.mining_semaphore.acquire(blocking=False)
 		if is_acquire:
 			with contextlib.ExitStack() as stack:
 				stack.callback(self.mining_semaphore.release)
 				self.mining()
-				loop = threading.Timer(MINING_TIMER_SEC, self.start_minig)
+				loop = threading.Timer(MINING_TIMER_SEC, self.start_mining)
 				loop.start()
 
 	def calculate_total_amount(self, blockchain_address):
